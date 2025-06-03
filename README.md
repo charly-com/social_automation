@@ -182,7 +182,7 @@ Uploads/
 ### 📬 Contact
 
 * Email: [uchecharles223@gmail.com](mailto:uchecharles223@gmail.com)
-* GitHub: [https://github.com/charly-com]
+* GitHub: [https://github.com/charly-com](https://github.com/charly-com)
 
 ### 🦪 License
 
