@@ -27,7 +27,7 @@ This is a Node.js application built with NestJS that automates the creation and 
 - **AI APIs:** OpenRouter, ElevenLabs
 - **Media:** `ffmpeg`, Craiyon
 - **Scheduling:** Agenda.js
-- **Deployment:** Render or Railway
+- **Deployment:** Render
 - **Storage:** Local (`Uploads/` folder)
 
 ---
@@ -51,12 +51,13 @@ This is a Node.js application built with NestJS that automates the creation and 
 git clone https://github.com/your-username/faceless-ai-content-app.git
 cd faceless-ai-content-app
 npm install
-Environment Variables
-Create a .env file:
+```
 
-env
-Copy
-Edit
+### Environment Variables
+
+Create a `.env` file:
+
+```env
 MONGO_URI=your_mongodb_atlas_uri
 OPENROUTER_API_KEY=your_openrouter_api_key
 ELEVENLABS_API_KEY=your_elevenlabs_api_key
@@ -66,55 +67,57 @@ YOUTUBE_REDIRECT_URI=http://localhost:3000/scheduler/oauth2callback
 YOUTUBE_REFRESH_TOKEN=your_youtube_refresh_token
 FACEBOOK_ACCESS_TOKEN=your_facebook_access_token
 BASE_URL=http://localhost:3000
-Start the Server
-bash
-Copy
-Edit
+```
+
+### Start the Server
+
+```bash
 npm run start:dev
-🔁 Usage
-Generate AI Content
-bash
-Copy
-Edit
+```
+
+### 🔁 Usage
+
+#### Generate AI Content
+
+```bash
 curl -X POST http://localhost:3000/content/generate \
   -H "Content-Type: application/json" \
   -d '{"topic": "budgeting for NYSC"}'
-View All Generated Content
-bash
-Copy
-Edit
+```
+
+#### View All Generated Content
+
+```bash
 curl http://localhost:3000/content
-🧠 YouTube OAuth Setup
-Go to Google Cloud Console.
+```
 
-Enable YouTube Data API v3.
+### 🧠 YouTube OAuth Setup
 
-Create OAuth 2.0 credentials (Web App):
+* Go to [Google Cloud Console](https://console.cloud.google.com)
+* Enable **YouTube Data API v3**
+* Create OAuth 2.0 credentials (Web App)
 
-Redirect URI: http://localhost:3000/scheduler/oauth2callback
+  * Redirect URI: `http://localhost:3000/scheduler/oauth2callback`
+* Visit `/scheduler/auth-url` to get auth URL, complete OAuth, and log the refresh token
 
-Visit /scheduler/auth-url to get auth URL, complete OAuth, and log the refresh token.
+### 📘 Facebook Setup
 
-📘 Facebook Setup
-Create an App on Facebook Developers.
+* Create an App on [Facebook Developers](https://developers.facebook.com)
+* Add a Facebook Page
+* Generate a Page Access Token with `publish_video` permissions
+* Add to `.env` as `FACEBOOK_ACCESS_TOKEN`
 
-Add a Facebook Page.
+### 🧪 API Reference
 
-Generate a Page Access Token with publish_video permissions.
+#### Manual Posts (Dashboard)
 
-Add to .env as FACEBOOK_ACCESS_TOKEN.
-
-🧪 API Reference
-Manual Posts (Dashboard)
-bash
-Copy
-Edit
+```bash
 curl http://localhost:3000/scheduler/posts
-Response:
+```
 
-json
-Copy
-Edit
+**Response:**
+
+```json
 [
   {
     "_id": "...",
@@ -125,18 +128,20 @@ Edit
     "caption": "Budgeting Tips for Nigerian Youth"
   }
 ]
-Cleanup Assets Older Than 30 Days
-bash
-Copy
-Edit
+```
+
+#### Cleanup Assets Older Than 30 Days
+
+```bash
 curl -X POST http://localhost:3000/scripts/trigger-cleanup
 curl -X POST http://localhost:3000/voiceovers/trigger-cleanup
 curl -X POST http://localhost:3000/thumbnails/trigger-cleanup
 curl -X POST http://localhost:3000/videos/trigger-cleanup
-🧾 Project Structure
-css
-Copy
-Edit
+```
+
+### 🧾 Project Structure
+
+```text
 src/
 ├── app.module.ts
 ├── main.ts
@@ -150,44 +155,35 @@ Uploads/
 ├── thumbnails/
 ├── videos/
 .env.example
-⚠️ Limitations
-Craiyon used as a mock thumbnail generator (consider switching to Replicate).
+```
 
-Instagram/TikTok manual posting (due to API restrictions).
+### ⚠️ Limitations
 
-Storage limited (~1 GB free-tier).
+* Craiyon used as a mock thumbnail generator (consider switching to Replicate)
+* Instagram/TikTok manual posting (due to API restrictions)
+* Storage limited (\~1 GB free-tier)
+* OpenRouter: Monitor usage limits (free-tier)
 
-OpenRouter: Monitor usage limits (free-tier).
+### 🔮 Future Improvements
 
-🔮 Future Improvements
-Real thumbnail AI with Replicate.
+* Real thumbnail AI with Replicate
+* CI/CD with GitHub Actions
+* Admin/creator roles (JWT Auth)
+* Analytics & A/B testing support
+* Video generation pipeline step 4 (ffmpeg integration)
 
-CI/CD with GitHub Actions.
+### 🛠 Troubleshooting
 
-Admin/creator roles (JWT Auth).
+* **API Errors**: Check `.env` keys and usage quotas
+* **Mongo Errors**: Verify connection string and IP whitelist
+* **Missing Folders**: Run `mkdir -p Uploads/{voiceovers,thumbnails,videos}`
+* **OAuth Issues**: Regenerate refresh token
 
-Analytics & A/B testing support.
+### 📬 Contact
 
-Video generation pipeline step 4 (ffmpeg integration).
+* Email: [uchecharles223@gmail.com](mailto:uchecharles223@gmail.com)
+* GitHub: [https://github.com/charly-com]
 
-🛠 Troubleshooting
-API Errors: Check .env keys and usage quotas.
+### 🦪 License
 
-Mongo Errors: Verify connection string and IP whitelist.
-
-Missing Folders: Run mkdir -p Uploads/{voiceovers,thumbnails,videos}.
-
-OAuth Issues: Regenerate refresh token.
-
-📬 Contact
-Email: uchecharles223@gmail.com
-GitHub: Your GitHub
-
-🪪 License
-MIT License — See LICENSE file for details.
-
-vbnet
-Copy
-Edit
-
-Let me know if you'd like me to export this to a `.md` file or embed it directly in your repo str
+MIT License — See `LICENSE` file for details.
